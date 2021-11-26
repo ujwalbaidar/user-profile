@@ -5,10 +5,18 @@
     </div>
     <!-- form div starts -->
     <div>
-        <label>First Name:</label>
-        <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" *ngIf="user"/>
-        <!-- if user data is not fetched display disabled text field -->
-        <input type="text" id="firstName" name="firstName" [disabled]="!user" [hidden]="user" />
+        <div>
+            <label>First Name:</label>
+            <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" *ngIf="user"/>
+            <!-- if user data is not fetched display disabled text field -->
+            <input type="text" id="firstName" name="firstName" [disabled]="!user" [hidden]="user" />
+        </div>
+        <div>
+            <label>Last Name:</label>
+            <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" *ngIf="user"/>
+            <!-- if user data is not fetched display disabled text field -->
+            <input type="text" id="lastName" name="lastName" [disabled]="!user" [hidden]="user" />
+        </div>
         <input type="button" value="Save"  (click)="saveProfile(); displayError=false;"/>
     </div>
     <!-- form div ends -->

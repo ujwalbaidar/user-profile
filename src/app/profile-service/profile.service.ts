@@ -30,12 +30,13 @@ export class ProfileService {
     });
   }
 
-  setName(firstName: string) {
+  setName(userdata:IProfile) {
     return new Promise((resolve, reject)=>{
       setTimeout(()=> {
         if(Math.round(Math.random())){
           if(this.user){
-            this.user.firstName = JSON.parse(JSON.stringify(firstName));
+            this.user.firstName = JSON.parse(JSON.stringify(userdata.firstName));
+            this.user.lastName = JSON.parse(JSON.stringify(userdata.lastName));
             resolve(this.user);
           }
         }else{

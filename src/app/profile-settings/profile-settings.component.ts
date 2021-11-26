@@ -47,7 +47,7 @@ export class ProfileSettingsComponent implements OnInit {
   saveProfile(){
     this.displaySave = true;
     if(this.user){
-      this.profile.setName(this.user.firstName)
+      this.profile.setName(this.user)
       .then(saveRes=>{
         this.displaySave = false;
         this.displayError = false;
@@ -59,7 +59,6 @@ export class ProfileSettingsComponent implements OnInit {
         this.saveProfile();
       })
     }
-
   }
 
 }
