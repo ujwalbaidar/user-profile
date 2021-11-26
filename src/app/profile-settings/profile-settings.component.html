@@ -1,14 +1,16 @@
 <div>
     <h1>{{title}}</h1>
     <div>
-        <p>Username: ...</p>
+        <p>Username: <span *ngIf="user">{{user.username}}</span></p>
     </div>
     <div>
         <label>First Name:</label>
-        <input type="text"/>
+        <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" *ngIf="user"/>
+        <!-- if user data is not fetched display disabled text field -->
+        <input type="text" id="firstName" name="firstName" [disabled]="!user" [hidden]="user" />
         <input type="button" value="Save"/>
     </div>
-    <p>Loading profile ...</p>
-    <p>Saving profile</p>
-    <p>Error!</p>
+    <p *ngIf="displayLoad">Loading Profile ...</p>
+    <p *ngIf="displaySave">Saving Profile ...</p>
+    <p *ngIf="displayError">Error!</p>
 </div>
