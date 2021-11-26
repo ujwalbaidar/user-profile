@@ -34,7 +34,10 @@ export class ProfileService {
     return new Promise((resolve, reject)=>{
       setTimeout(()=> {
         if(Math.round(Math.random())){
-          resolve(this.user);
+          if(this.user){
+            this.user.firstName = JSON.parse(JSON.stringify(firstName));
+            resolve(this.user);
+          }
         }else{
           reject({ error: 'Invalid name' });
         }

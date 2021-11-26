@@ -8,11 +8,11 @@ import { IProfile, ProfileService } from '../profile-service/profile.service';
 export class ProfileSettingsComponent implements OnInit {
   public title = 'Profile';
   public user: IProfile|undefined;
-  
-  public displayLoad = false;
-  public displaySave = false;
-  public displayError = false;
 
+  public displayLoad: Boolean = false;
+  public displaySave: Boolean = false;
+  public displayError: Boolean = false;
+  public errorMessage: String = "";
   constructor(private profile: ProfileService) { }
   /** 
    * call getUserProfile on initialization 
@@ -38,6 +38,28 @@ export class ProfileSettingsComponent implements OnInit {
       })
 
   }
-  saveProfile(){}
+  /** 
+   * when save button is clicked, it displays save message
+   * if save is successful remove save message and any error message that occured while saving
+   * then update user data
+   * if save is not success display error message and error occurance 
+   * again try to update save new data**/
+  saveProfile(){
+    this.displaySave = true;
+    if(this.user){
+      this.profile.setName(this.user.firstName)
+      .then(saveRes=>{
+        this.displaySave = false;
+        this.displayError = false;
+        this.user  = JSON.parse(JSON.stringify(saveRes));
+      })
+      .catch(saveErr=>{
+        this.displayError = true;
+        this.errorMessage = saveErr.error;
+        this.saveProfile();
+      })
+    }
+
+  }
 
 }
