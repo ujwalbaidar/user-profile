@@ -17,6 +17,7 @@
             <!-- if user data is not fetched display disabled text field -->
             <input type="text" id="lastName" name="lastName" [disabled]="!user" [hidden]="user" />
         </div>
+        <p>Email: <span *ngIf="user">{{user.email}}</span></p>
         <input type="button" value="Save"  (click)="saveProfile(); displayError=false;"/>
     </div>
     <!-- form div ends -->

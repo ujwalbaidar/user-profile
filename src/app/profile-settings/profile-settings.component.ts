@@ -8,6 +8,7 @@ import { IProfile, ProfileService } from '../profile-service/profile.service';
 export class ProfileSettingsComponent implements OnInit {
   public title = 'Profile';
   public user: IProfile|undefined;
+  public userCopy: IProfile|undefined;
 
   public displayLoad: Boolean = false;
   public displaySave: Boolean = false;
@@ -32,26 +33,28 @@ export class ProfileSettingsComponent implements OnInit {
       .then(userdata=>{
         this.displayLoad = false;
         this.user = userdata;
+        this.userCopy = JSON.parse(JSON.stringify(userdata));
       })
       .catch(err=>{
         this.getuserProfile();
       })
 
   }
+  
   /** 
    * when save button is clicked, it displays save message
-   * if save is successful remove save message and any error message that occured while saving
-   * then update user data
+   * if save is successful call save email method
+   *    then update user data
    * if save is not success display error message and error occurance 
-   * again try to update save new data**/
+   *    again try to update save new data**/
+
   saveProfile(){
     this.displaySave = true;
+    
     if(this.user){
       this.profile.setName(this.user)
       .then(saveRes=>{
-        this.displaySave = false;
-        this.displayError = false;
-        this.user  = JSON.parse(JSON.stringify(saveRes));
+        this.saveEmail(saveRes);
       })
       .catch(saveErr=>{
         this.displayError = true;
@@ -59,6 +62,28 @@ export class ProfileSettingsComponent implements OnInit {
         this.saveProfile();
       })
     }
+  }
+
+  /**
+   * get save response from saveProfile method
+   * if save is successful hide error and save message display
+   * update user data as well as copy for unsuccessful response for future calls
+   * if save is not success display error message for generating email
+   *    reload previous user data and set to user profile **/
+  saveEmail(saveResp:any){
+    this.profile.setUserEmail(saveResp)
+      .then(finalRes=>{
+        this.displaySave = false;
+        this.displayError = false;
+        this.user = JSON.parse(JSON.stringify(finalRes));
+        this.userCopy = JSON.parse(JSON.stringify(finalRes));
+      })
+      .catch(finalErr=>{
+        this.displayError = true;
+        this.errorMessage = finalErr.error;
+        this.displaySave = false;
+        this.user = this.userCopy;
+      })
   }
 
 }
