@@ -1,0 +1,13 @@
+{
+    "profile": "Profile(fr)",    
+    "username": "User Name(fr)",
+    "firstname": "First Name(fr)",
+    "lastname": "Last Name(fr)",
+    "email": "Email(fr)",
+    "save": "Save(fr)",
+    "loadingprofile": "Loading Profile ...(fr)",
+    "savingprofile": "Saving Profile ...(fr)",
+    "invalidname": "Invalid name(fr)",
+    "error": "Error(fr)",
+    "emailerror": "Error on email generation(fr)"
+}

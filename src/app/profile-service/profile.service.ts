@@ -42,7 +42,7 @@ export class ProfileService {
             resolve(this.user);
           }
         }else{
-          reject({ error: 'Invalid name' });
+          reject({ error: 'invalidname' });
         }
       }, Math.random() * 5000);
     });
@@ -61,7 +61,7 @@ export class ProfileService {
             resolve(this.user);
           }
         }else{
-          reject({ error: 'Error on email generation' });
+          reject({ error: 'emailerror' });
         }
       }, Math.random() * 5000);
     });

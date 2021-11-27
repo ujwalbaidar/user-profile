@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { IProfile, ProfileService } from '../profile-service/profile.service';
+import { TranslateConfigService } from '../profile-service/translate-config.service';
+
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.css']
 })
 export class ProfileSettingsComponent implements OnInit {
-  public title = 'Profile';
+  public title = 'profile';
   public user: IProfile|undefined;
   public userCopy: IProfile|undefined;
 
   public displayLoad: Boolean = false;
   public displaySave: Boolean = false;
   public displayError: Boolean = false;
-  public errorMessage: String = "";
-  constructor(private profile: ProfileService) { }
+  public errorMessage: any;
+  constructor(private profile: ProfileService, private translate: TranslateConfigService) { }
   /** 
    * call getUserProfile on initialization 
    * while data is not received display loading as true
@@ -84,6 +86,10 @@ export class ProfileSettingsComponent implements OnInit {
         this.displaySave = false;
         this.user = this.userCopy;
       })
+  }
+
+  changeLanguage(ev: any){
+    this.translate.changeLanguage(ev.target.value);
   }
 
 }

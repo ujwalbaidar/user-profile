@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 const routes: Routes = [
-  { path: 'profile-settings', component: ProfileSettingsComponent},
+  { 
+    path: 'profile-settings', 
+    component: ProfileSettingsComponent
+  },
   { path: '', redirectTo: '/profile-settings', pathMatch: 'full'}
 ];
 

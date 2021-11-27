@@ -1,27 +1,34 @@
+<!-- language selection option starts -->
 <div>
-    <h1>{{title}}</h1>
+    <select (change)="changeLanguage($event)"> 
+        <option *ngFor="let lang of ['de', 'en', 'fr']" [selected]="lang=='en'">{{lang}}</option>
+    </select>
+</div>
+<!-- language selection div end -->
+<div>
+    <h1>{{title|translate}}</h1>
     <div>
-        <p>Username: <span *ngIf="user">{{user.username}}</span></p>
+        <p>{{'username'|translate}}: <span *ngIf="user">{{user.username}}</span></p>
     </div>
     <!-- form div starts -->
     <div>
         <div>
-            <label>First Name:</label>
+            <label>{{'firstname'|translate}}:</label>
             <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" *ngIf="user"/>
             <!-- if user data is not fetched display disabled text field -->
             <input type="text" id="firstName" name="firstName" [disabled]="!user" [hidden]="user" />
         </div>
         <div>
-            <label>Last Name:</label>
+            <label>{{'lastname'|translate}}:</label>
             <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" *ngIf="user"/>
             <!-- if user data is not fetched display disabled text field -->
             <input type="text" id="lastName" name="lastName" [disabled]="!user" [hidden]="user" />
         </div>
-        <p>Email: <span *ngIf="user">{{user.email}}</span></p>
-        <input type="button" value="Save"  (click)="saveProfile(); displayError=false;"/>
+        <p>{{'email'|translate}}: <span *ngIf="user">{{user.email}}</span></p>
+        <input type="button" value="{{'save'|translate}}"  (click)="saveProfile(); displayError=false;"/>
     </div>
     <!-- form div ends -->
-    <p *ngIf="displayLoad">Loading Profile ...</p>
-    <p *ngIf="displaySave">Saving Profile ...</p>
-    <p *ngIf="displayError">Error! {{errorMessage}}</p>
+    <p *ngIf="displayLoad">{{'loadingprofile'|translate}}</p>
+    <p *ngIf="displaySave">{{'savingprofile'|translate}}</p>
+    <p *ngIf="displayError">{{'error'|translate}}! <span *ngIf="errorMessage">{{errorMessage|translate}}</span></p>
 </div>
